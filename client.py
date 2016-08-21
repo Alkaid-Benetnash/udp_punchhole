@@ -30,3 +30,4 @@ class Client(object):
             print(data.decode())
         except socket.timeout:
             print("No Response")
+        self.socket.close()
