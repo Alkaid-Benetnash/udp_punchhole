@@ -12,6 +12,7 @@ class Client(object):
         :param port:
         """
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.socket.settimeout(self.TIME_OUT)
         if port is not None:
             if host is None:
                 host = ''

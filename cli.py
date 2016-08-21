@@ -27,12 +27,11 @@ mutual_group.add_argument("-d", "--daemon", action="store_true", help="run as a 
 mutual_group.add_argument("-H", type=str, help="remote host")
 
 arg_parser.add_argument("-P", type=int, default=DEFUALT_PORT, help="remote port")
-arg_parser.add_argument("host", type=str, nargs="?", default='', help="use to a particular local addr")
+arg_parser.add_argument("host", type=str, nargs="?", default='0.0.0.0', help="use to a particular local addr")
 arg_parser.add_argument("port", type=int, nargs="?", default=DEFUALT_PORT, help="use a particular local port")
 arg_parser.add_argument("-v", "--version", action="version", version="%(prog)s " + VERSION)
 
 args = arg_parser.parse_args()
-print(args)
 
 if args.daemon:
     server = Daemon(args.host, args.port)
