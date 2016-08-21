@@ -1,15 +1,26 @@
 import socket
 
+
 class Daemon(object):
-    BUF_SIZE=4096
-    def __init__(self, host='0.0.0.0', port=6789):
-        self.host = host
-        self.port = port
+    BUF_SIZE = 4096
+
+    def __init__(self, host, port):
+        """
+        create a udp socket bind to specific address
+        :param port:
+        :param host:
+        """
+        self.addr = (host, port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.socket.bind(self.addr)
 
     def listen(self):
+        """
+        listen, tell any sender their address.
+        :return:
+        """
         try:
-            print("Listening {}:{}".format(self.host, self.port))
+            print("Listening {}:{}".format(*self.addr))
             while True:
                 data, addr = self.socket.recvfrom(self.BUF_SIZE)
                 print("Receive message from {}:{}".format(*addr))
